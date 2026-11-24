@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "261945063167",
+    "project_id": "moviesc20",
+    "storage_bucket": "moviesc20.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261945063167:android:18010754a5939d68c03eca",
+        "android_client_info": {
+          "package_name": "com.example.movies"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9aZ4MQwK0UtNLmK0qEnUpYvwVkUeE3bk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

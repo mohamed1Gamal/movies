@@ -1,10 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider;
 import 'package:flutter/material.dart';
 import 'package:movies/core/theme/app_color.dart';
-import 'package:movies/modules/authentication/services/auth_service.dart';
 import 'package:movies/modules/layout/layout_screens/movie_details_screen.dart';
 import 'package:movies/modules/layout/layout_screens/update_profile_screen.dart';
 import 'package:movies/modules/layout/service/api_manager.dart';
+
+import 'package:movies/modules/authentication/manager/auth_provider.dart';
 
 import '../../../core/widgets/avatar_widget.dart';
 
@@ -83,9 +84,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         foregroundColor: AppColor.white,
                       ),
                       onPressed: () {
-                        print(currentAvatar);
+                        print(user);
                         setState(() {
-
+                          // AuthService.signOut();
+                          AuthProvider().signOut(context);
                         });
                       },
                       child: Padding(

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/core/theme/app_color.dart';
@@ -10,11 +11,14 @@ class LayoutScreen extends StatefulWidget {
   static String routeName = "layout";
   const LayoutScreen({super.key});
 
+
   @override
   State<LayoutScreen> createState() => _LayoutScreenState();
 }
 
-int index = 0;
+
+
+
 
 List<Widget> screens = [
   HomeScreen(),
@@ -24,16 +28,31 @@ List<Widget> screens = [
 ];
 
 class _LayoutScreenState extends State<LayoutScreen> {
+
+int index = 0;
+  @override
+  void initState() {
+
+    super.initState();
+    var user = FirebaseAuth.instance.currentUser;
+    if(user == null){
+      index = 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: screens[index],
       backgroundColor: Colors.transparent,
       bottomNavigationBar: Container(
-        color: Colors.green,
         margin: EdgeInsetsGeometry.all(16),
         height: 64,
         width: double.infinity,
+        decoration: BoxDecoration(
+           color: AppColor.darkGray,
+            borderRadius: BorderRadiusGeometry.circular(16)
+        ),
         child: BottomNavigationBar(
 
 

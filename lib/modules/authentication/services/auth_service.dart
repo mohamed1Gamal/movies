@@ -37,7 +37,7 @@ class AuthService {
         final credential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: email, password: password);
         return credential.user!;
-      } on FirebaseAuthException catch (e) {
+      } on FirebaseAuthException {
         throw 'Invalid Email or Password';
       }
     } catch (e) {
@@ -53,12 +53,16 @@ class AuthService {
       try {
          await FirebaseAuth.instance
             .sendPasswordResetEmail(email: email);
-      } on FirebaseAuthException catch (e) {
+      } on FirebaseAuthException  {
         throw 'Invalid Email or Password';
       }
     } catch (e) {
       rethrow;
     }
+  }
+
+  static Future<void> signOut() async{
+    await FirebaseAuth.instance.signOut();
   }
 
 }

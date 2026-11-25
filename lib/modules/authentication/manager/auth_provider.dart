@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies/core/theme/app_color.dart';
 import 'package:movies/core/toast_service/toast.dart';
+import 'package:movies/modules/authentication/screens/login_screen.dart';
 import 'package:movies/modules/authentication/services/auth_service.dart';
 import 'package:movies/modules/layout/layout_screens/layout_screen.dart';
 
@@ -44,7 +44,9 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     try {
       user = await AuthService.signIn(email: email, password: password);
+      print(user);
       if (user.emailVerified) {
+        print("inside");
         Toast.show(title: "Welcome back ${user.displayName}", context: context);
         Navigator.pushReplacementNamed(context, LayoutScreen.routeName);
       }
@@ -66,6 +68,22 @@ class AuthProvider extends ChangeNotifier {
       if (user.emailVerified) {
         Toast.show(title: "Check your email", context: context);
       }
+    } catch (e) {
+      Toast.show(title: e.toString(), context: context, type: ToastType.error);
+    }
+    isLoading = false;
+    notifyListeners();
+  }
+
+
+   Future<void> signOut(BuildContext context) async {
+    isLoading = true;
+    notifyListeners();
+    try {
+      await AuthService.signOut();
+        Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+
+
     } catch (e) {
       Toast.show(title: e.toString(), context: context, type: ToastType.error);
     }
